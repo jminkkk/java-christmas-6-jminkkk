@@ -12,4 +12,8 @@ public class InputView {
             throw new IllegalArgumentException(ONLY_NUMBER_ALLOWED.getMessage());
         }
     }
+
+    public String readMenuAndCount() {
+        return Console.readLine();
+    }
 }
