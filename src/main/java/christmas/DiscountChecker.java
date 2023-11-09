@@ -10,9 +10,9 @@ public class DiscountChecker {
     private final int MAX_ORDER_SIZE = 20;
 
     public boolean canDiscount(Order order) {
-        return isOverDiscountPrice(order.getTotalPrice()) &&
+        return isOverDiscountPrice(order.getBeforeDiscountPrice()) &&
                 isNotOnlyDrink(order) &&
-                isOverSize(order.getItems());
+                isOverSize(order.getOrderItems());
     }
 
     private boolean isOverDiscountPrice(int totalPrice) {
@@ -20,10 +20,10 @@ public class DiscountChecker {
     }
 
     private boolean isNotOnlyDrink(Order order) {
-        int drinkCount = (int) order.getItems().stream()
+        int drinkCount = (int) order.getOrderItems().stream()
                 .filter(this::isDrink)
                 .count();
-        int itemCount = order.getItems().size();
+        int itemCount = order.getOrderItems().size();
 
         return drinkCount == itemCount;
     }
