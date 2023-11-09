@@ -10,6 +10,10 @@ public class Order {
         this.items = items;
     }
 
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
     public int getTotalPrice() {
         return items.stream()
             .mapToInt(OrderItem::getTotalPrice)
