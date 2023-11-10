@@ -12,6 +12,7 @@ public class ChristmasDdayEvent implements DateEvent {
         return expectedVisitDate <= endedDate;
     }
 
+    @Override
     public void apply(Order order) {
         int discountPeriod = order.getExpectedVisitDate() - startedDate;
         int discountAmount = INITIAL_DISCOUNT_AMOUNT + discountPeriod * DISCOUNT_INTEREST;
