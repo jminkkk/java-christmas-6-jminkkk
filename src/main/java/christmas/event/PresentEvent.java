@@ -1,6 +1,6 @@
 package christmas.event;
 
-import christmas.Order;
+import christmas.domain.order.Order;
 
 public class PresentEvent implements TotalPriceEvent {
     private final int discountAmount = 25_000;

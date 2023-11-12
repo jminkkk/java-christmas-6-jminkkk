@@ -1,7 +1,7 @@
 package christmas.event;
 
-import christmas.Order;
-import christmas.OrderItem;
+import christmas.domain.order.Order;
+import christmas.domain.order.OrderItem;
 import christmas.domain.EventDate;
 import christmas.domain.menu.MenuCategory;
 import java.util.List;

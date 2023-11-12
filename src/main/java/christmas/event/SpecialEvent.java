@@ -1,6 +1,6 @@
 package christmas.event;
 
-import christmas.Order;
+import christmas.domain.order.Order;
 import christmas.domain.EventDate;
 
 public class SpecialEvent implements DateEvent {

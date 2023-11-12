@@ -3,6 +3,8 @@ package christmas;
 import static christmas.domain.menu.MenuCategory.DRINK;
 
 import christmas.domain.menu.Menu;
+import christmas.domain.order.Order;
+import christmas.domain.order.OrderItem;
 import java.util.List;
 
 public class DiscountChecker {

@@ -4,7 +4,7 @@ import static christmas.util.StringParser.splitByMenuAndCount;
 import static christmas.util.StringParser.splitByOrderItem;
 
 import christmas.domain.menu.Menu;
-import christmas.OrderItem;
+import christmas.domain.order.OrderItem;
 import java.util.Arrays;
 import java.util.List;
 

@@ -1,7 +1,6 @@
-package christmas;
+package christmas.domain.order;
 
 import christmas.event.DecemberEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
