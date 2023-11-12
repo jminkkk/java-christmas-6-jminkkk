@@ -1,15 +1,21 @@
 package christmas;
 
+import christmas.event.DecemberEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
     private final int expectedVisitDate;
     private final List<OrderItem> orderItems;
-    private int beforeDiscountPrice;
+    private final int beforeDiscountPrice;
+    private int afterDiscountPrice;
+    private List<DecemberEvent> discountHistory;
+
     public Order(int visitDate, List<OrderItem> items) {
         this.expectedVisitDate = visitDate;
         this.orderItems = items;
         beforeDiscountPrice = calculateBeforeDiscountPrice();
+        this.discountHistory = new ArrayList<>();
     }
 
     public int getExpectedVisitDate() {
@@ -31,6 +37,10 @@ public class Order {
     }
 
     public void discount(int discountAmount) {
-        beforeDiscountPrice -= discountAmount;
+        afterDiscountPrice -= discountAmount;
+    }
+
+    public void addEventHistory(DecemberEvent event) {
+        discountHistory.add(event);
     }
 }
