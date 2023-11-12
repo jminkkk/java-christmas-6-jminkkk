@@ -1,6 +1,7 @@
 package christmas.util;
 
 import static christmas.exception.Exception.INVALID_DATE;
+import static christmas.exception.Exception.INVALID_ORDER;
 import static christmas.util.StringParser.splitByMenuAndCount;
 import static christmas.util.StringParser.splitByOrderItem;
 
@@ -21,10 +22,18 @@ public class OrderItemConverter {
     private static OrderItem convertToOrderItem(String menuAndCount) {
         String[] itemAndCount = splitByMenuAndCount(menuAndCount);
 
-        Menu item = Menu.valueOf(itemAndCount[0]);
+        Menu item = getMenu(itemAndCount[0]);
         int count = getCount(itemAndCount[1]);
 
         return OrderItem.of(item, count);
+    }
+
+    private static Menu getMenu(String menu) {
+        try {
+            return Menu.valueOf(menu);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
     }
 
     private static int getCount(String count) {
