@@ -5,7 +5,7 @@ import static christmas.exception.Exception.ONLY_NUMBER_ALLOWED;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    public int readDate() {
+    public static int readVisitDate() {
         try {
             return Integer.parseInt(Console.readLine());
         } catch (NumberFormatException e) {
@@ -13,7 +13,7 @@ public class InputView {
         }
     }
 
-    public String readMenuAndCount() {
+    public static String readMenuAndCount() {
         return Console.readLine();
     }
 }
