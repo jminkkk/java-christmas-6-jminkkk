@@ -1,7 +1,8 @@
 package christmas.event;
 
-import christmas.domain.menu.Menu;
+import christmas.OrderItem;
+import java.util.List;
 
 public interface MenuEvent {
-    boolean isConditioned(Menu menu);
+    boolean isConditioned(List<OrderItem> menu);
 }
