@@ -4,7 +4,6 @@ import static christmas.exception.Exception.INVALID_DATE;
 import static christmas.util.StringParser.splitByMenuAndCount;
 import static christmas.util.StringParser.splitByOrderItem;
 
-import christmas.InputValidator;
 import christmas.domain.menu.Menu;
 import christmas.domain.order.OrderItem;
 import java.util.Arrays;
