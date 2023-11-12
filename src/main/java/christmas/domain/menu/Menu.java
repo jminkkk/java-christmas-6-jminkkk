@@ -40,4 +40,8 @@ public enum Menu {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER.getMessage()));
     }
+
+    public boolean isDrink() {
+        return category.equals(MenuCategory.DRINK);
+    }
 }
