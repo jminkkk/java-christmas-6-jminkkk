@@ -41,7 +41,7 @@ public enum Menu {
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER.getMessage()));
     }
 
-    public boolean isDesert() {
-        return category.equals(MenuCategory.DESSERT);
+    public boolean isCategory(MenuCategory category) {
+        return this.category.equals(category);
     }
 }
