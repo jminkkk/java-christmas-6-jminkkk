@@ -41,7 +41,7 @@ public enum Menu {
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER.getMessage()));
     }
 
-    public boolean isCategory(MenuCategory category) {
+    public boolean isSameCategory(MenuCategory category) {
         return this.category.equals(category);
     }
 }

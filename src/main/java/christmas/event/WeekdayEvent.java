@@ -3,7 +3,6 @@ package christmas.event;
 import christmas.Order;
 import christmas.OrderItem;
 import christmas.domain.EventDate;
-import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuCategory;
 import java.util.List;
 
@@ -28,13 +27,13 @@ public class WeekdayEvent implements DateEvent, MenuEvent {
     public boolean isConditioned(List<OrderItem> orderItems) {
         return orderItems.stream()
                 .map(OrderItem::getMenu)
-                .anyMatch(menu -> menu.isCategory(MenuCategory.DESSERT));
+                .anyMatch(menu -> menu.isSameCategory(MenuCategory.DESSERT));
     }
 
     public int getDesertCount(List<OrderItem> orderItems) {
         return (int) orderItems.stream()
                 .map(OrderItem::getMenu)
-                .filter(menu -> menu.isCategory(MenuCategory.DESSERT))
+                .filter(menu -> menu.isSameCategory(MenuCategory.DESSERT))
                 .count();
     }
 }
