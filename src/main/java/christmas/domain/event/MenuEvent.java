@@ -1,4 +1,4 @@
-package christmas.event;
+package christmas.domain.event;
 
 import christmas.domain.order.OrderItem;
 import java.util.List;

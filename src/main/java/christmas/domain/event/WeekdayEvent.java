@@ -1,4 +1,4 @@
-package christmas.event;
+package christmas.domain.event;
 
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
@@ -6,17 +6,18 @@ import christmas.domain.EventDate;
 import christmas.domain.menu.MenuCategory;
 import java.util.List;
 
-public class WeekendEvent implements DateEvent, MenuEvent{
+public class WeekdayEvent implements DateEvent, MenuEvent {
     private final int DISCOUNT_AMOUNT = 2_023;
+
     @Override
     public boolean isConditioned(int expectedVisitDate) {
-        return EventDate.WEEKEND_EVENT_DATE.isConditioned(expectedVisitDate);
+        return EventDate.WEEKDAY_EVENT_DATE.isConditioned(expectedVisitDate);
     }
 
     @Override
     public void apply(Order order) {
-        int mainMenuCount = getMainMenuCount(order.getOrderItems());
-        int discountAmount = mainMenuCount * DISCOUNT_AMOUNT;
+        int desertCount = getDesertCount(order.getOrderItems());
+        int discountAmount = desertCount * DISCOUNT_AMOUNT;
 
         order.addEventHistory(this, discountAmount);
     }
@@ -25,13 +26,13 @@ public class WeekendEvent implements DateEvent, MenuEvent{
     public boolean isConditioned(List<OrderItem> orderItems) {
         return orderItems.stream()
                 .map(OrderItem::getMenu)
-                .anyMatch(menu -> menu.isSameCategory(MenuCategory.MAIN_COURSE));
+                .anyMatch(menu -> menu.isSameCategory(MenuCategory.DESSERT));
     }
 
-    public int getMainMenuCount(List<OrderItem> orderItems) {
+    public int getDesertCount(List<OrderItem> orderItems) {
         return (int) orderItems.stream()
                 .map(OrderItem::getMenu)
-                .filter(menu -> menu.isSameCategory(MenuCategory.MAIN_COURSE))
+                .filter(menu -> menu.isSameCategory(MenuCategory.DESSERT))
                 .count();
     }
 }

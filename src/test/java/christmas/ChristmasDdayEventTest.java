@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
-import christmas.event.ChristmasDdayEvent;
+import christmas.domain.event.ChristmasDdayEvent;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
