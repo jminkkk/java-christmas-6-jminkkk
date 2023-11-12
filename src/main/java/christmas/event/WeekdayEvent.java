@@ -16,14 +16,24 @@ public class WeekdayEvent implements DateEvent, MenuEvent {
 
     @Override
     public void apply(Order order) {
-        order.discount(DISCOUNT_AMOUNT);
-        order.addEventHistory(this);
+        int desertCount = getDesertCount(order.getOrderItems());
+        int discountAmount = desertCount * DISCOUNT_AMOUNT;
+
+        order.discount(discountAmount);
+        order.addEventHistory(this, discountAmount);
     }
 
     @Override
     public boolean isConditioned(List<OrderItem> orderItems) {
         return orderItems.stream()
                 .map(OrderItem::getMenu)
-                .anyMatch(Menu::isDrink);
+                .anyMatch(Menu::isDesert);
+    }
+
+    public int getDesertCount(List<OrderItem> orderItems) {
+        return (int) orderItems.stream()
+                .map(OrderItem::getMenu)
+                .filter(Menu::isDesert)
+                .count();
     }
 }

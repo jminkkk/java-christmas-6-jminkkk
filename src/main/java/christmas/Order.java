@@ -2,20 +2,22 @@ package christmas;
 
 import christmas.event.DecemberEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Order {
     private final int expectedVisitDate;
     private final List<OrderItem> orderItems;
     private final int beforeDiscountPrice;
     private int afterDiscountPrice;
-    private List<DecemberEvent> discountHistory;
+    private Map<DecemberEvent, Integer> discountHistory;
 
     public Order(int visitDate, List<OrderItem> items) {
         this.expectedVisitDate = visitDate;
         this.orderItems = items;
         beforeDiscountPrice = calculateBeforeDiscountPrice();
-        this.discountHistory = new ArrayList<>();
+        this.discountHistory = new HashMap<>();
     }
 
     public int getExpectedVisitDate() {
@@ -40,7 +42,7 @@ public class Order {
         afterDiscountPrice -= discountAmount;
     }
 
-    public void addEventHistory(DecemberEvent event) {
-        discountHistory.add(event);
+    public void addEventHistory(DecemberEvent event, int discountAmount) {
+        discountHistory.put(event, discountAmount);
     }
 }
