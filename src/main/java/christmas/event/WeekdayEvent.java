@@ -19,7 +19,6 @@ public class WeekdayEvent implements DateEvent, MenuEvent {
         int desertCount = getDesertCount(order.getOrderItems());
         int discountAmount = desertCount * DISCOUNT_AMOUNT;
 
-        order.discount(discountAmount);
         order.addEventHistory(this, discountAmount);
     }
 

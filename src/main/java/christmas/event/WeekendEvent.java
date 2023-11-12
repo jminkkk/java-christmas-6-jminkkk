@@ -18,7 +18,6 @@ public class WeekendEvent implements DateEvent, MenuEvent{
         int mainMenuCount = getMainMenuCount(order.getOrderItems());
         int discountAmount = mainMenuCount * DISCOUNT_AMOUNT;
 
-        order.discount(discountAmount);
         order.addEventHistory(this, discountAmount);
     }
 

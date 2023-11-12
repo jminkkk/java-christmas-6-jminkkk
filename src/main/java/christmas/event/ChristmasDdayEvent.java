@@ -17,7 +17,6 @@ public class ChristmasDdayEvent implements DateEvent {
         int discountPeriod = order.getExpectedVisitDate() - startedDate;
         int discountAmount = INITIAL_DISCOUNT_AMOUNT + discountPeriod * DISCOUNT_INTEREST;
 
-        order.discount(discountAmount);
         order.addEventHistory(this, discountAmount);
     }
 }

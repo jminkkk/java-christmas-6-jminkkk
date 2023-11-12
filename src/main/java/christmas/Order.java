@@ -37,11 +37,6 @@ public class Order {
     public int getBeforeDiscountPrice() {
         return beforeDiscountPrice;
     }
-
-    public void discount(int discountAmount) {
-        afterDiscountPrice -= discountAmount;
-    }
-
     public void addEventHistory(DecemberEvent event, int discountAmount) {
         discountHistory.put(event, discountAmount);
     }
