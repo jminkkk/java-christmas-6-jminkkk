@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class OrderItemConverter {
-    private static final String regex = ".*[가-힣,-]+.*";
+    private static final String REGEX = "^(?=.*[가-힣])(?=.*,)(?=.*-).*$";
 
     public static List<OrderItem> convert(String input) {
         validate(input);
@@ -44,7 +44,7 @@ public class OrderItemConverter {
     }
 
     private static void validate(String menuAndCount) {
-        if (!Pattern.matches(regex, menuAndCount)) {
+        if (!Pattern.matches(REGEX, menuAndCount)) {
             throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
