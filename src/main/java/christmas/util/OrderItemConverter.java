@@ -30,7 +30,7 @@ public class OrderItemConverter {
 
     private static Menu getMenu(String menu) {
         try {
-            return Menu.valueOf(menu);
+            return Menu.of(menu);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
