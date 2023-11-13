@@ -1,5 +1,5 @@
 package christmas.domain.event;
 
-public interface DateEvent extends DecemberEvent {
+public interface DateEvent extends Event {
     boolean isConditioned(int expectedVisitDate);
 }
