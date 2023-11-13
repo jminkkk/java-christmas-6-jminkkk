@@ -3,6 +3,7 @@ package christmas;
 import static christmas.exception.Exception.INVALID_ORDER;
 import static christmas.exception.Exception.ORDER_ONLY_UNDER_MAX;
 
+import christmas.domain.menu.MenuCategory;
 import christmas.domain.order.OrderItem;
 import java.util.List;
 
@@ -44,6 +45,19 @@ public class OrderValidator {
         return (int) orderItems.stream()
                 .map(OrderItem::getMenu)
                 .distinct()
+                .count();
+    }
+
+    private void validateOnlyDrink(List<OrderItem> orderItems) {
+        if (orderItems.size() == getDrinkCount(orderItems)) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
+    }
+
+    private int getDrinkCount(List<OrderItem> orderItems) {
+        return (int) orderItems.stream()
+                .map(OrderItem::getMenu)
+                .filter(menu -> menu.isSameCategory(MenuCategory.DRINK))
                 .count();
     }
 }
