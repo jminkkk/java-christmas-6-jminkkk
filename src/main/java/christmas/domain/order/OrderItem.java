@@ -22,4 +22,8 @@ public class OrderItem {
     public int getTotalPrice() {
         return menu.getPrice() * quantity;
     }
+
+    public static OrderItem of(Menu menu, int quantity) {
+        return new OrderItem(menu, quantity);
+    }
 }
