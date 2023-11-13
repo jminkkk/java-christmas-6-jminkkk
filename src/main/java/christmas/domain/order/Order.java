@@ -1,30 +1,14 @@
 package christmas.domain.order;
 
-
-import static christmas.exception.Exception.INVALID_DATE;
-
-import christmas.OrderValidator;
-import christmas.domain.event.DecemberEvent;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Order {
     private final int expectedVisitDate;
     private final List<OrderItem> orderItems;
-    private final int beforeDiscountPrice;
-    private int afterDiscountPrice;
-    private Map<DecemberEvent, Integer> discountHistory;
 
     public Order(int visitDate, List<OrderItem> items) {
-        OrderValidator.validate(visitDate);
         this.expectedVisitDate = visitDate;
-
-        OrderValidator.validate(items);
         this.orderItems = items;
-
-        beforeDiscountPrice = calculateBeforeDiscountPrice();
-        this.discountHistory = new HashMap<>();
     }
 
     public int getExpectedVisitDate() {
@@ -39,13 +23,5 @@ public class Order {
         return orderItems.stream()
                 .mapToInt(OrderItem::getTotalPrice)
                 .sum();
-    }
-
-    public int getBeforeDiscountPrice() {
-        return beforeDiscountPrice;
-    }
-
-    public void addEventHistory(DecemberEvent event, int discountAmount) {
-        discountHistory.put(event, discountAmount);
     }
 }
