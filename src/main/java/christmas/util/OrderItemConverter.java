@@ -1,6 +1,6 @@
 package christmas.util;
 
-import static christmas.exception.Exception.INVALID_ORDER;
+import static christmas.global.Exception.INVALID_ORDER;
 import static christmas.util.StringParser.splitByMenuAndCount;
 import static christmas.util.StringParser.splitByOrderItem;
 

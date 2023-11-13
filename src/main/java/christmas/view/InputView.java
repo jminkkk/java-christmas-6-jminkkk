@@ -1,6 +1,6 @@
 package christmas.view;
 
-import static christmas.exception.Exception.INVALID_DATE;
+import static christmas.global.Exception.INVALID_DATE;
 
 import camp.nextstep.edu.missionutils.Console;
 

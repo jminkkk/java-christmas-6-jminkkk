@@ -1,4 +1,4 @@
-package christmas.exception;
+package christmas.global;
 
 public enum Exception {
     INVALID_DATE("유효하지 않은 날짜입니다."),

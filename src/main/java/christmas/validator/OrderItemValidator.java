@@ -1,8 +1,8 @@
 package christmas.validator;
 
-import static christmas.exception.Exception.CAN_NOT_ORDER_ONLY_DRINK;
-import static christmas.exception.Exception.INVALID_ORDER;
-import static christmas.exception.Exception.ORDER_ONLY_UNDER_MAX;
+import static christmas.global.Exception.CAN_NOT_ORDER_ONLY_DRINK;
+import static christmas.global.Exception.INVALID_ORDER;
+import static christmas.global.Exception.ORDER_ONLY_UNDER_MAX;
 
 import christmas.domain.menu.MenuCategory;
 import christmas.domain.order.OrderItem;

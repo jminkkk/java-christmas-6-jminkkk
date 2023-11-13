@@ -1,6 +1,6 @@
 package christmas.domain.menu;
 
-import static christmas.exception.Exception.INVALID_ORDER;
+import static christmas.global.Exception.INVALID_ORDER;
 
 import java.util.Arrays;
 
@@ -27,8 +27,8 @@ public enum Menu {
         this.price = price;
     }
 
-    public MenuCategory getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
     public int getPrice() {
         return price;

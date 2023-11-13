@@ -1,6 +1,6 @@
 package christmas.validator;
 
-import static christmas.exception.Exception.INVALID_DATE;
+import static christmas.global.Exception.INVALID_DATE;
 
 public class VisitDateValidator {
     private static final int MIN_VISIT_DATE = 1;
