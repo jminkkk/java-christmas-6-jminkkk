@@ -8,9 +8,13 @@ import christmas.domain.menu.Menu;
 import christmas.domain.order.OrderItem;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class OrderItemConverter {
+    private static final String regex = ".*[가-힣,-]+.*";
+
     public static List<OrderItem> convert(String input) {
+        validate(input);
         String[] orderItems = splitByOrderItem(input);
 
         return Arrays.stream(orderItems)
@@ -35,6 +39,12 @@ public class OrderItemConverter {
         try {
             return Integer.parseInt(count);
         } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
+    }
+
+    private static void validate(String menuAndCount) {
+        if (!Pattern.matches(regex, menuAndCount)) {
             throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
