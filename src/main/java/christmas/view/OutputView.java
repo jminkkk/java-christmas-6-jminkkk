@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.BenefitHistory;
 import christmas.domain.order.Order;
 
 public class OutputView {
@@ -21,7 +22,7 @@ public class OutputView {
         println(ORDER_MENU_COMMENT);
     }
 
-    public static void printEventBenefits(Order order) {
+    public static void printEventBenefits(BenefitHistory benefitHistory) {
         println(EVENT_BENEFITS_COMMENT);
         println();
 
