@@ -8,6 +8,7 @@ public class OutputView {
     private static final String ORDER_MENU_COMMENT = "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
     private static final String EVENT_BENEFITS_COMMENT = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String CRLF = "";
+
     public static void printWelcome() {
         println(WELCOME_COMMENT);
     }
@@ -35,6 +36,10 @@ public class OutputView {
 
     public static void println() {
         println(CRLF);
+    }
+
+    public static void println(RuntimeException exception) {
+        println(exception.getMessage());
     }
 
     public static void println(String message) {
