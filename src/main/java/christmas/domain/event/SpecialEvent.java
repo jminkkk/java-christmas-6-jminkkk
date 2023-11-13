@@ -12,7 +12,7 @@ public class SpecialEvent implements DateEvent {
     }
 
     @Override
-    public void apply(Order order) {
-        order.addEventHistory(this, DISCOUNT_AMOUNT);
+    public int getDiscountAmount(Order order) {
+        return DISCOUNT_AMOUNT;
     }
 }

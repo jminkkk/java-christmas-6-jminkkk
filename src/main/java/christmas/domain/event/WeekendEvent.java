@@ -14,11 +14,9 @@ public class WeekendEvent implements DateEvent, MenuEvent{
     }
 
     @Override
-    public void apply(Order order) {
+    public int getDiscountAmount(Order order) {
         int mainMenuCount = getMainMenuCount(order.getOrderItems());
-        int discountAmount = mainMenuCount * DISCOUNT_AMOUNT;
-
-        order.addEventHistory(this, discountAmount);
+        return mainMenuCount * DISCOUNT_AMOUNT;
     }
 
     @Override
