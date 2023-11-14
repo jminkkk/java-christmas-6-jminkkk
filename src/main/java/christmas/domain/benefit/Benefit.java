@@ -1,5 +1,7 @@
 package christmas.domain.benefit;
 
+import java.util.Objects;
+
 public class Benefit {
     private final BenefitType benefitType;
     private final int benefitAmount;
@@ -19,5 +21,22 @@ public class Benefit {
 
     public static Benefit of(BenefitType benefitType, int benefitAmount) {
         return new Benefit(benefitType, benefitAmount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Benefit benefit = (Benefit) o;
+        return benefitAmount == benefit.benefitAmount && benefitType == benefit.benefitType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(benefitType, benefitAmount);
     }
 }
