@@ -44,4 +44,9 @@ public class OrderItem {
     public int hashCode() {
         return Objects.hash(menu, quantity);
     }
+
+    @Override
+    public String toString() {
+        return menu.getName() + " " + quantity + "개";
+    }
 }

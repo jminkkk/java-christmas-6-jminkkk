@@ -1,14 +1,28 @@
 package christmas.view;
 
-import christmas.domain.BenefitHistory;
+import static christmas.global.Comment.BEFORE_TOTAL_AMOUNT_COMMENT;
+import static christmas.global.Comment.BENEFIT_HISTORY_COMMENT;
+import static christmas.global.Comment.DECEMBER_EVENT_BADGE_COMMENT;
+import static christmas.global.Comment.EVENT_BENEFITS_COMMENT;
+import static christmas.global.Comment.INPUT_ORDER_MENU_COMMENT;
+import static christmas.global.Comment.NO_VALUE_COMMENT;
+import static christmas.global.Comment.ORDER_MENU_COMMENT;
+import static christmas.global.Comment.PRESENT_MENU_COMMENT;
+import static christmas.global.Comment.TOTAL_BENEFIT_AMOUNT_COMMENT;
+import static christmas.global.Comment.TOTAL_PAYMENT_AMOUNT_COMMENT;
+import static christmas.global.Comment.VISIT_DATE_COMMENT;
+import static christmas.global.Comment.WELCOME_COMMENT;
+import static christmas.global.Comment.DECEMBER;
+import static christmas.util.PrintFormatter.printMoney;
+import static christmas.util.PrintFormatter.printMinusMoney;
+import static christmas.util.PrintFormatter.println;
+
+import christmas.domain.benefit.Badge;
+import christmas.domain.benefit.BenefitHistory;
 import christmas.domain.order.Order;
+import java.util.Optional;
 
 public class OutputView {
-    private static final String WELCOME_COMMENT = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
-    private static final String VISIT_DATE_COMMENT = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!).";
-    private static final String ORDER_MENU_COMMENT = "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
-    private static final String EVENT_BENEFITS_COMMENT = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
-    private static final String CRLF = "";
 
     public static void printWelcome() {
         println(WELCOME_COMMENT);
@@ -19,31 +33,58 @@ public class OutputView {
     }
 
     public static void printOrderMenu() {
-        println(ORDER_MENU_COMMENT);
+        println(INPUT_ORDER_MENU_COMMENT);
     }
 
-    public static void printEventBenefits(BenefitHistory benefitHistory) {
-        println(EVENT_BENEFITS_COMMENT);
+    public static void printEventBenefits(Order order, BenefitHistory benefitHistory) {
+        int visitDate = order.getExpectedVisitDate();
+        println(DECEMBER.getMessage() + visitDate + EVENT_BENEFITS_COMMENT.getMessage());
         println();
 
-        // 주문 내역
-        // 할인 전 총주문 금액
-        // 증정 메뉴
-        // 혜택 내역
-        // 총혜택 금액
-        // 할인 후 예상 결제 금액
-        // 12월 이벤트 배지
+        printOrder(order);
+        printBenefits(benefitHistory);
+        printTotalBenefitAmount(benefitHistory.getTotalBenefitAmount());
+        printAmountAfterDiscount(order.getTotalPrice(), benefitHistory);
     }
 
-    public static void println() {
-        println(CRLF);
+    private static void printOrder(Order order) {
+        println(ORDER_MENU_COMMENT);
+        println(order.getOrderItems());
+        println();
+
+        println(BEFORE_TOTAL_AMOUNT_COMMENT);
+        printMoney(order.getTotalPrice());
+        println();
     }
 
-    public static void println(RuntimeException exception) {
-        println(exception.getMessage());
+    private static void printBenefits(BenefitHistory benefitHistory) {
+        println(PRESENT_MENU_COMMENT);
+        println(benefitHistory.getPresentItems());
+        println();
+
+        println(BENEFIT_HISTORY_COMMENT);
+        println(benefitHistory.getEventAndBenefitAmounts());
+        println();
     }
 
-    public static void println(String message) {
-        System.out.println(message);
+    private static void printTotalBenefitAmount(int totalBenefitAmount) {
+        println(TOTAL_BENEFIT_AMOUNT_COMMENT);
+        printMinusMoney(totalBenefitAmount);
+        println();
+    }
+
+    public static void printAmountAfterDiscount(int totalPrice, BenefitHistory benefitHistory) {
+        println(TOTAL_PAYMENT_AMOUNT_COMMENT);
+        printMoney(benefitHistory.getAmountAfterDiscount(totalPrice));
+        println();
+    }
+
+    public static void printBadge(Optional<Badge> badge) {
+        println(DECEMBER_EVENT_BADGE_COMMENT);
+        if (badge.isPresent()) {
+            println(badge.get().getName());
+            return;
+        }
+        println(NO_VALUE_COMMENT);
     }
 }
