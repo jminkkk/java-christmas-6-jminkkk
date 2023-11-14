@@ -1,5 +1,6 @@
 package christmas.domain.order;
 
+import christmas.domain.menu.MenuCategory;
 import java.util.List;
 
 public class Order {
@@ -19,9 +20,20 @@ public class Order {
         return orderItems;
     }
 
-    private int calculateBeforeDiscountPrice() {
+    public int getTotalPrice() {
         return orderItems.stream()
                 .mapToInt(OrderItem::getTotalPrice)
                 .sum();
+    }
+
+    public int getCategoryCount(MenuCategory category) {
+        return orderItems.stream()
+                .filter(orderItem -> orderItem.getMenu().isSameCategory(category))
+                .mapToInt(OrderItem::getQuantity)
+                .sum();
+    }
+
+    public static Order of(int visitDate, List<OrderItem> items) {
+        return new Order(visitDate, items);
     }
 }
