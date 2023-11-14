@@ -30,7 +30,7 @@ public class WeekdayEvent implements DateEvent, MenuEvent {
 
     @Override
     public boolean isConditioned(int expectedVisitDate) {
-        return EventDate.WEEKDAY_EVENT_DATE.isConditioned(expectedVisitDate);
+        return EventDate.WEEKDAY_EVENT_DATE.contains(expectedVisitDate);
     }
 
     @Override

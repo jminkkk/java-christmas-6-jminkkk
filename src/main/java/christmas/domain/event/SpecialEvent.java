@@ -25,6 +25,6 @@ public class SpecialEvent implements DateEvent {
 
     @Override
     public boolean isConditioned(int expectedVisitDate) {
-        return EventDate.STAR_EVENT_DATE.isConditioned(expectedVisitDate);
+        return EventDate.STAR_EVENT_DATE.contains(expectedVisitDate);
     }
 }

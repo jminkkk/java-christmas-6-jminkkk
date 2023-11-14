@@ -13,7 +13,7 @@ public enum EventDate {
         this.conditionDates = conditionDates;
     }
 
-    public boolean isConditioned(int expectedVisitDate) {
+    public boolean contains(int expectedVisitDate) {
         return conditionDates.contains(expectedVisitDate);
     }
 }
