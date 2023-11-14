@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class BenefitGenerator {
-    private static final int MINIMUM_EVENT_APPLY_PRICE = 10_000;
+public class BenefitHistoryGenerator {
+    private static final int MINIMUM_EVENT_APPLICATION_PRICE = 10_000;
     private static final List<Event> AVAILABLE_EVENTS =
             List.of(new ChristmasDdayEvent(),
                     new SpecialEvent(),
@@ -28,17 +28,17 @@ public class BenefitGenerator {
                     new WeekdayEvent());
 
     public BenefitHistory generateBenefitHistory(Order order) {
-        if (order.getTotalPrice() < MINIMUM_EVENT_APPLY_PRICE) {
+        if (order.getTotalPrice() < MINIMUM_EVENT_APPLICATION_PRICE) {
             return new BenefitHistory(new HashMap<>(), new ArrayList<>());
         }
 
-        Map<Event, Benefit> appliedEventAndBenefits = checkApplyEvents(order);
-        List<PresentItem> presents = checkGiftPresents(appliedEventAndBenefits);
+        Map<Event, Benefit> appliedEventAndBenefits = applyEvents(order);
+        List<PresentItem> presents = giftPresents(appliedEventAndBenefits);
 
         return new BenefitHistory(appliedEventAndBenefits, presents);
     }
 
-    private Map<Event, Benefit> checkApplyEvents(Order order) {
+    private Map<Event, Benefit> applyEvents(Order order) {
         Map<Event, Benefit> eventHistory = new HashMap<>();
 
         for (Event event : AVAILABLE_EVENTS) {
@@ -50,7 +50,7 @@ public class BenefitGenerator {
         return eventHistory;
     }
 
-    public List<PresentItem> checkGiftPresents(Map<Event, Benefit> applyEvent) {
+    public List<PresentItem> giftPresents(Map<Event, Benefit> applyEvent) {
         List<PresentItem> presents = new ArrayList<>();
 
         if (applyEvent.containsKey(PresentEvent.class)) {
