@@ -1,7 +1,6 @@
-package christmas.domain;
+package christmas.domain.benefit;
 
-import static christmas.domain.BenefitType.DISCOUNT;
-import static christmas.domain.BenefitType.PRESENT;
+import static christmas.domain.benefit.BenefitType.DISCOUNT;
 
 import christmas.domain.event.Event;
 import java.util.List;
@@ -33,13 +32,6 @@ public class BenefitHistory {
     public int getTotalDiscountAmount() {
         return eventAndBenefitAmounts.values().stream()
                 .filter(benefit -> benefit.getBenefitType() == DISCOUNT)
-                .mapToInt(Benefit::getBenefitAmount)
-                .sum();
-    }
-
-    public int getTotalPresentAmount() {
-        return eventAndBenefitAmounts.values().stream()
-                .filter(benefit -> benefit.getBenefitType() == PRESENT)
                 .mapToInt(Benefit::getBenefitAmount)
                 .sum();
     }
