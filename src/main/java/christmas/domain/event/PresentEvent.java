@@ -1,14 +1,22 @@
 package christmas.domain.event;
 
+import christmas.domain.benefit.Benefit;
+import christmas.domain.benefit.BenefitType;
 import christmas.domain.order.Order;
 
 public class PresentEvent implements TotalPriceEvent {
+    private final String NAME = "증정 이벤트";
     private final int MINIMUM_TOTAL_PRICE = 120_000;
-    private final int DISCOUNT_AMOUNT = 25_000;
+    private final int BENEFIT_AMOUNT = 25_000;
 
     @Override
-    public int getDiscountAmount(Order order) {
-        return DISCOUNT_AMOUNT;
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public Benefit applyBenefit(Order order) {
+        return Benefit.of(BenefitType.PRESENT, BENEFIT_AMOUNT);
     }
 
     @Override

@@ -1,12 +1,21 @@
 package christmas.domain.event;
 
+import christmas.domain.benefit.Benefit;
+import christmas.domain.benefit.BenefitType;
 import christmas.domain.order.Order;
 
 public class SpecialEvent implements DateEvent {
+    private final String NAME = "특별 할인";
     private final int DISCOUNT_AMOUNT = 1_000;
+
     @Override
-    public int getDiscountAmount(Order order) {
-        return DISCOUNT_AMOUNT;
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public Benefit applyBenefit(Order order) {
+        return Benefit.of(BenefitType.DISCOUNT, DISCOUNT_AMOUNT);
     }
 
     @Override
