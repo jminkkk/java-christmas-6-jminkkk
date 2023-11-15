@@ -39,4 +39,8 @@ public class BenefitHistory {
     public int getAmountAfterDiscount(int totalAmount) {
         return totalAmount - getTotalDiscountAmount();
     }
+
+    public Badge getBadge() {
+        return Badge.of(getTotalBenefitAmount());
+    }
 }
