@@ -59,7 +59,7 @@ public class OutputView {
     }
 
     public static void println(Badge badge) {
-        if (badge != null) {
+        if (badge == null) {
             println(NO_VALUE_COMMENT);
             return;
         }
