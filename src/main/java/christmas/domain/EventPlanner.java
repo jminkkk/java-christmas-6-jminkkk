@@ -1,76 +1,85 @@
 package christmas.domain;
 
 
-import static christmas.util.PrintFormatter.println;
+import static christmas.global.Comment.BEFORE_TOTAL_AMOUNT_COMMENT;
+import static christmas.global.Comment.BENEFIT_HISTORY_COMMENT;
+import static christmas.global.Comment.DECEMBER;
+import static christmas.global.Comment.DECEMBER_EVENT_BADGE_COMMENT;
+import static christmas.global.Comment.EVENT_BENEFITS_COMMENT;
+import static christmas.global.Comment.NO_VALUE_COMMENT;
+import static christmas.global.Comment.ORDER_MENU_COMMENT;
+import static christmas.global.Comment.PRESENT_MENU_COMMENT;
+import static christmas.global.Comment.TOTAL_BENEFIT_AMOUNT_COMMENT;
+import static christmas.global.Comment.TOTAL_PAYMENT_AMOUNT_COMMENT;
+import static christmas.view.OutputView.printMinusMoney;
+import static christmas.view.OutputView.printMoney;
+import static christmas.view.OutputView.println;
 
 import christmas.domain.benefit.Badge;
 import christmas.domain.benefit.BenefitHistory;
 import christmas.domain.order.Order;
-import christmas.domain.order.OrderItem;
-import christmas.util.OrderItemConverter;
-import christmas.validator.OrderItemValidator;
-import christmas.validator.VisitDateValidator;
-import christmas.view.InputView;
-import christmas.view.OutputView;
-import java.util.List;
-import java.util.Optional;
 
 public class EventPlanner {
-    private final BenefitHistoryGenerator benefitHistoryGenerator;
-
-    public EventPlanner(BenefitHistoryGenerator benefitHistoryGenerator) {
-        this.benefitHistoryGenerator = benefitHistoryGenerator;
+    private final Order order;
+    private final BenefitHistory benefitHistory;
+    public EventPlanner(Order order, BenefitHistory benefitHistory) {
+        this.order = order;
+        this.benefitHistory = benefitHistory;
     }
 
-    public void serveCustomer() {
-        OutputView.printWelcome();
-        Order order = receiveOrder();
-
-        BenefitHistory benefitHistory = getBenefitsHistory(order);
-        OutputView.printEventBenefits(order, benefitHistory);
-
-        Optional<Badge> badge = getBadge(benefitHistory);
-        OutputView.printBadge(badge);
+    public void notifyEventHistory() {
+        notifyPreview();
+        notifyOrder();
+        notifyBenefits();
+        notifyTotalPayment();
+        notifyBadge();
     }
 
-    private Order receiveOrder() {
-        int visitDate = askVisitDate();
-        List<OrderItem> orderItems = askOrderMenu();
-
-        return Order.of(visitDate, orderItems);
+    public void notifyPreview() {
+        int visitDate = order.getExpectedVisitDate();
+        println(DECEMBER.getMessage() + visitDate + EVENT_BENEFITS_COMMENT.getMessage());
+        println();
     }
 
-    public int askVisitDate() {
-        OutputView.printVisitDate();
-        try {
-            int visitDate = InputView.readVisitDate();
-            VisitDateValidator.validate(visitDate);
-            return visitDate;
-        } catch (IllegalArgumentException e) {
-            println(e);
-            return askVisitDate();
+    private void notifyOrder() {
+        println(ORDER_MENU_COMMENT);
+        println(order.getOrderItems());
+        println();
+
+        println(BEFORE_TOTAL_AMOUNT_COMMENT);
+        printMoney(order.getTotalPrice());
+        println();
+    }
+
+    private void notifyBenefits() {
+        println(PRESENT_MENU_COMMENT);
+        println(benefitHistory.getPresentItems());
+        println();
+
+        println(BENEFIT_HISTORY_COMMENT);
+        println(benefitHistory.getEventAndBenefitAmounts());
+        println();
+
+        println(TOTAL_BENEFIT_AMOUNT_COMMENT);
+        printMinusMoney(benefitHistory.getTotalBenefitAmount());
+        println();
+    }
+
+    private void notifyTotalPayment() {
+        println(TOTAL_PAYMENT_AMOUNT_COMMENT);
+
+        int totalPrice = order.getTotalPrice();
+        printMoney(benefitHistory.getAmountAfterDiscount(totalPrice));
+        println();
+    }
+
+    public void notifyBadge() {
+        println(DECEMBER_EVENT_BADGE_COMMENT);
+        Badge badge = benefitHistory.getBadge();
+        if (badge != null) {
+            println(badge.getName());
+            return;
         }
-    }
-
-    public List<OrderItem> askOrderMenu() {
-        OutputView.printOrderMenu();
-        try {
-            String menuAndCount = InputView.readMenuAndCount();
-            List<OrderItem> orderItems = OrderItemConverter.convert(menuAndCount);
-            OrderItemValidator.validate(orderItems);
-            return orderItems;
-        } catch (IllegalArgumentException e) {
-            println(e);
-            return askOrderMenu();
-        }
-    }
-
-    private BenefitHistory getBenefitsHistory(Order order) {
-        return benefitHistoryGenerator.generateBenefitHistory(order);
-    }
-
-    private Optional<Badge> getBadge(BenefitHistory benefitHistory) {
-        int totalBenefitAmount = benefitHistory.getTotalBenefitAmount();
-        return benefitHistoryGenerator.giftBadge(totalBenefitAmount);
+        println(NO_VALUE_COMMENT);
     }
 }
