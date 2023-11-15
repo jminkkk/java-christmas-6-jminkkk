@@ -68,18 +68,25 @@ public class EventPlanner {
     private void notifyTotalPayment() {
         println(TOTAL_PAYMENT_AMOUNT_COMMENT);
 
-        int totalPrice = order.getTotalPrice();
-        printMoney(benefitHistory.getAmountAfterDiscount(totalPrice));
+        int totalPaymentAmount = checkTotalPayment();
+        printMoney(totalPaymentAmount);
         println();
     }
 
     public void notifyBadge() {
         println(DECEMBER_EVENT_BADGE_COMMENT);
-        Badge badge = benefitHistory.getBadge();
-        if (badge != null) {
-            println(badge.getName());
-            return;
-        }
-        println(NO_VALUE_COMMENT);
+        Badge badge = checkBadge();
+        println(badge);
+    }
+
+    public int checkTotalPayment() {
+        int totalPrice = order.getTotalPrice();
+        int totalDiscountAmount = benefitHistory.getTotalDiscountAmount();
+        return totalPrice - totalDiscountAmount;
+    }
+
+    public Badge checkBadge() {
+        int totalBenefitAmount = benefitHistory.getTotalBenefitAmount();
+        return Badge.of(totalBenefitAmount);
     }
 }

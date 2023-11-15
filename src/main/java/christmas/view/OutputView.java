@@ -5,6 +5,7 @@ import static christmas.global.Comment.NO_VALUE_COMMENT;
 import static christmas.global.Comment.VISIT_DATE_COMMENT;
 import static christmas.global.Comment.WELCOME_COMMENT;
 
+import christmas.domain.benefit.Badge;
 import christmas.domain.benefit.Benefit;
 import christmas.domain.event.Event;
 import christmas.global.Comment;
@@ -58,5 +59,14 @@ public class OutputView {
 
     public static void printMinusMoney(int money) {
         println(MoneyFormatter.minusFormat(money));
+    }
+
+    public static void println(Badge badge) {
+        if (badge != null) {
+            println(NO_VALUE_COMMENT);
+            return;
+        }
+
+        println(badge.getName());
     }
 }
