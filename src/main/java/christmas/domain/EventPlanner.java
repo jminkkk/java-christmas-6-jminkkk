@@ -20,6 +20,7 @@ import christmas.domain.order.Order;
 public class EventPlanner {
     private final Order order;
     private final BenefitHistory benefitHistory;
+
     public EventPlanner(Order order, BenefitHistory benefitHistory) {
         this.order = order;
         this.benefitHistory = benefitHistory;
