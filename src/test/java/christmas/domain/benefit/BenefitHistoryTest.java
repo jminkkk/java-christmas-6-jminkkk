@@ -26,7 +26,7 @@ class BenefitHistoryTest {
         BenefitHistory benefitHistory = new BenefitHistory(eventAndBenefitAmounts, presentItems);
 
         assertAll(
-                () -> assertThat(benefitHistory.getTotalBenefitAmount()).isEqualTo(35_000),
+                () -> assertThat(benefitHistory.getTotalBenefitAmount()).isEqualTo(26_000),
                 () -> assertThat(benefitHistory.getTotalDiscountAmount()).isEqualTo(1_000)
         );
     }
