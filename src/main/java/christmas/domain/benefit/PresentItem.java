@@ -1,27 +1,11 @@
 package christmas.domain.benefit;
 
+import christmas.domain.Item;
 import christmas.domain.menu.Menu;
 
-public class PresentItem {
-    private final Menu menu;
-    private final int quantity;
-
-    public PresentItem(Menu menu, int quantity) {
-        this.menu = menu;
-        this.quantity = quantity;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public int getPresentAmount() {
-        return menu.getPrice() * quantity;
-    }
-
-    @Override
-    public String toString() {
-        return menu.getName() + " " + quantity + "개";
+public class PresentItem extends Item {
+    protected PresentItem(Menu menu, int quantity) {
+        super(menu, quantity);
     }
 
     public static PresentItem of(Menu menu, int quantity) {
