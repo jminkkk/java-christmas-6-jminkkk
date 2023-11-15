@@ -19,8 +19,8 @@ class ChristmasDdayEventTest {
     void apply() {
         int expectedVisitDate = 1;
         Order order = new Order(expectedVisitDate, List.of(
-                new OrderItem(BARBECUE_RIBS, 1),
-                new OrderItem(ZERO_COKE, 1)));
+                OrderItem.of(BARBECUE_RIBS, 1),
+                OrderItem.of(ZERO_COKE, 1)));
 
         Benefit benefit = Benefit.of(BenefitType.DISCOUNT, 1000);
         assertAll(
@@ -34,8 +34,8 @@ class ChristmasDdayEventTest {
     void notApply() {
         int notAppliedDate = 26;
         Order order = new Order(notAppliedDate, List.of(
-                new OrderItem(BARBECUE_RIBS, 1),
-                new OrderItem(ZERO_COKE, 1)));
+                OrderItem.of(BARBECUE_RIBS, 1),
+                OrderItem.of(ZERO_COKE, 1)));
 
         assertThat(new ChristmasDdayEvent().isConditioned(order)).isFalse();
     }

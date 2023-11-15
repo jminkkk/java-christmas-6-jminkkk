@@ -22,8 +22,8 @@ class WeekendEventTest {
         int expectedVisitDate = 1;
         int mainMenuCount = 3;
         Order order = new Order(expectedVisitDate, List.of(
-                new OrderItem(BARBECUE_RIBS, mainMenuCount),
-                new OrderItem(ZERO_COKE, 1)));
+                OrderItem.of(BARBECUE_RIBS, mainMenuCount),
+                OrderItem.of(ZERO_COKE, 1)));
 
         Benefit benefit = Benefit.of(BenefitType.DISCOUNT, 2_023 * mainMenuCount);
         assertAll(
@@ -37,8 +37,8 @@ class WeekendEventTest {
     void notApplyByExpectedVisitDate() {
         int notAppliedDate = 3;
         Order order = new Order(notAppliedDate, List.of(
-                new OrderItem(BARBECUE_RIBS, 1),
-                new OrderItem(ZERO_COKE, 1)));
+                OrderItem.of(BARBECUE_RIBS, 1),
+                OrderItem.of(ZERO_COKE, 1)));
 
         assertThat(new WeekendEvent().isConditioned(order)).isFalse();
     }
@@ -48,8 +48,8 @@ class WeekendEventTest {
     void notApplyByMenu() {
         int expectedVisitDate = 1;
         Order order = new Order(expectedVisitDate, List.of(
-                new OrderItem(TAPAS, 1),
-                new OrderItem(ZERO_COKE, 1)));
+                OrderItem.of(TAPAS, 1),
+                OrderItem.of(ZERO_COKE, 1)));
 
         assertThat(new WeekendEvent().isConditioned(order)).isFalse();
     }

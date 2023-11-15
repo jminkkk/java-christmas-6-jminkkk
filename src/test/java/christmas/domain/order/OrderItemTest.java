@@ -11,6 +11,6 @@ class OrderItemTest {
     @Test
     void getTotalPrice() {
         OrderItem orderItem = OrderItem.of(Menu.CHAMPAGNE, 3);
-        assertThat(orderItem.getTotalPrice()).isEqualTo(75_000);
+        assertThat(orderItem.getAmountByQuantity()).isEqualTo(75_000);
     }
 }

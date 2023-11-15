@@ -54,7 +54,7 @@ public class BenefitHistoryGenerator {
         List<PresentItem> presents = new ArrayList<>();
 
         if (applyEvent.containsKey(PresentEvent.class)) {
-            presents.add(new PresentItem(Menu.CHAMPAGNE, 1));
+            presents.add(PresentItem.of(Menu.CHAMPAGNE, 1));
         }
 
         return presents;

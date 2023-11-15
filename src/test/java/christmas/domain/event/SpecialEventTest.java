@@ -20,8 +20,8 @@ class SpecialEventTest {
     void apply() {
         int expectedVisitDate = 3;
         Order order = new Order(expectedVisitDate, List.of(
-                new OrderItem(BARBECUE_RIBS, 3),
-                new OrderItem(ZERO_COKE, 1)));
+                OrderItem.of(BARBECUE_RIBS, 3),
+                OrderItem.of(ZERO_COKE, 1)));
 
         Benefit benefit = Benefit.of(BenefitType.DISCOUNT, 1_000);
         assertAll(
@@ -35,8 +35,8 @@ class SpecialEventTest {
     void notApply() {
         int expectedVisitDate = 11;
         Order order = new Order(expectedVisitDate, List.of(
-                new OrderItem(TAPAS, 1),
-                new OrderItem(ZERO_COKE, 1)));
+                OrderItem.of(TAPAS, 1),
+                OrderItem.of(ZERO_COKE, 1)));
 
         assertThat(new SpecialEvent().isConditioned(order)).isFalse();
     }
