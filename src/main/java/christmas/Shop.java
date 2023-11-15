@@ -2,6 +2,7 @@ package christmas;
 
 
 import static christmas.global.Comment.INPUT_ORDER_MENU_COMMENT;
+import static christmas.global.Comment.NOT_SATISFIED_MINIMUM_EVENT_APPLICATION_PRICE;
 import static christmas.global.Comment.VISIT_DATE_COMMENT;
 import static christmas.global.Comment.WELCOME_COMMENT;
 import static christmas.view.OutputView.println;
@@ -17,6 +18,7 @@ import christmas.view.InputView;
 import java.util.List;
 
 public class Shop {
+    private static final int MINIMUM_EVENT_APPLICATION_PRICE = 10_000;
     private final BenefitHistoryGenerator benefitHistoryGenerator;
 
     public Shop(BenefitHistoryGenerator benefitHistoryGenerator) {
@@ -29,8 +31,12 @@ public class Shop {
         List<OrderItem> orderItems = askOrderMenu();
 
         Order newOrder = receiveOrder(visitDate, orderItems);
-        BenefitHistory benefitHistory = benefitHistoryGenerator.generateBenefitHistory(newOrder);
 
+        if (newOrder.getTotalPrice() < MINIMUM_EVENT_APPLICATION_PRICE) {
+            println(NOT_SATISFIED_MINIMUM_EVENT_APPLICATION_PRICE);
+        }
+
+        BenefitHistory benefitHistory = benefitHistoryGenerator.generateBenefitHistory(newOrder);
         EventPlanner eventPlanner = new EventPlanner(newOrder, benefitHistory);
         eventPlanner.notifyEventHistory();
     }
