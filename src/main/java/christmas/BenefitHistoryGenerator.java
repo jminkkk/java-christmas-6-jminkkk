@@ -1,6 +1,5 @@
 package christmas;
 
-import christmas.domain.Badge;
 import christmas.domain.benefit.Benefit;
 import christmas.domain.benefit.BenefitHistory;
 import christmas.domain.benefit.PresentItem;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class BenefitHistoryGenerator {
     private static final int MINIMUM_EVENT_APPLICATION_PRICE = 10_000;
@@ -32,36 +30,28 @@ public class BenefitHistoryGenerator {
             return new BenefitHistory(new HashMap<>(), new ArrayList<>());
         }
 
-        Map<Event, Benefit> appliedEventAndBenefits = applyEvents(order);
-        List<PresentItem> presents = giftPresents(appliedEventAndBenefits);
-
-        return new BenefitHistory(appliedEventAndBenefits, presents);
+        return applyEvents(order);
     }
 
-    private Map<Event, Benefit> applyEvents(Order order) {
+    private BenefitHistory applyEvents(Order order) {
         Map<Event, Benefit> eventHistory = new HashMap<>();
+        List<PresentItem> presents = new ArrayList<>();
 
         for (Event event : AVAILABLE_EVENTS) {
             if (event.isConditioned(order)) {
                 eventHistory.put(event, event.applyBenefit(order));
+                giftPresents(event, presents);
             }
         }
 
-        return eventHistory;
+        return BenefitHistory.of(eventHistory, presents);
     }
 
-    public List<PresentItem> giftPresents(Map<Event, Benefit> applyEvent) {
-        List<PresentItem> presents = new ArrayList<>();
-
-        if (applyEvent.containsKey(PresentEvent.class)) {
+    public List<PresentItem> giftPresents(Event event, List<PresentItem> presents) {
+        if (event instanceof PresentEvent) {
             presents.add(PresentItem.of(Menu.CHAMPAGNE, 1));
         }
 
         return presents;
-    }
-
-    public Optional<Badge> giftBadge(int totalBenefitAmount) {
-        Badge badge = Badge.of(totalBenefitAmount);
-        return Optional.ofNullable(badge);
     }
 }

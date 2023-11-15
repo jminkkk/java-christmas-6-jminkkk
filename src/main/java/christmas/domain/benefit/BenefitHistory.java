@@ -35,4 +35,8 @@ public class BenefitHistory {
                 .mapToInt(Benefit::getBenefitAmount)
                 .sum();
     }
+
+    public static BenefitHistory of(Map<Event, Benefit> eventAndBenefitAmounts, List<PresentItem> presentItems) {
+        return new BenefitHistory(eventAndBenefitAmounts, presentItems);
+    }
 }
