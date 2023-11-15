@@ -7,6 +7,8 @@ import christmas.domain.benefit.Benefit;
 import christmas.domain.event.Event;
 import christmas.global.Comment;
 import christmas.util.MoneyFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -36,9 +38,14 @@ public class OutputView {
             return;
         }
 
-        eventAndDiscountAmounts.forEach((event, benefits) -> {
-            println(event.getName() + ": " + MoneyFormatter.minusFormat(benefits.getBenefitAmount()));
-        });
+        List<Event> events = new ArrayList<>(eventAndDiscountAmounts.keySet());
+        events.sort((event1, event2) -> (eventAndDiscountAmounts.get(event1)
+                .compareTo(eventAndDiscountAmounts.get(event2))));
+
+        for(Event event : events) {
+            int benefitAmount = eventAndDiscountAmounts.get(event).getBenefitAmount();
+            println(event.getName() + ": " + MoneyFormatter.minusFormat(benefitAmount));
+        }
     }
 
     public static void println(List<?> items) {

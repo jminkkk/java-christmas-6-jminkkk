@@ -39,4 +39,8 @@ public class Benefit {
     public int hashCode() {
         return Objects.hash(benefitType, benefitAmount);
     }
+
+    public int compareTo(Benefit benefit) {
+        return benefit.getBenefitAmount() - this.getBenefitAmount();
+    }
 }
