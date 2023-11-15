@@ -6,7 +6,6 @@ import static christmas.global.Comment.BENEFIT_HISTORY_COMMENT;
 import static christmas.global.Comment.DECEMBER;
 import static christmas.global.Comment.DECEMBER_EVENT_BADGE_COMMENT;
 import static christmas.global.Comment.EVENT_BENEFITS_COMMENT;
-import static christmas.global.Comment.NO_VALUE_COMMENT;
 import static christmas.global.Comment.ORDER_MENU_COMMENT;
 import static christmas.global.Comment.PRESENT_MENU_COMMENT;
 import static christmas.global.Comment.TOTAL_BENEFIT_AMOUNT_COMMENT;
@@ -15,7 +14,6 @@ import static christmas.view.OutputView.printMinusMoney;
 import static christmas.view.OutputView.printMoney;
 import static christmas.view.OutputView.println;
 
-import christmas.domain.benefit.Badge;
 import christmas.domain.benefit.BenefitHistory;
 import christmas.domain.order.Order;
 

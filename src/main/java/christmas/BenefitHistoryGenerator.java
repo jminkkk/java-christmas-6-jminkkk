@@ -1,6 +1,6 @@
-package christmas.domain;
+package christmas;
 
-import christmas.domain.benefit.Badge;
+import christmas.domain.Badge;
 import christmas.domain.benefit.Benefit;
 import christmas.domain.benefit.BenefitHistory;
 import christmas.domain.benefit.PresentItem;

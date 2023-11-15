@@ -1,11 +1,8 @@
 package christmas.view;
 
-import static christmas.global.Comment.INPUT_ORDER_MENU_COMMENT;
 import static christmas.global.Comment.NO_VALUE_COMMENT;
-import static christmas.global.Comment.VISIT_DATE_COMMENT;
-import static christmas.global.Comment.WELCOME_COMMENT;
 
-import christmas.domain.benefit.Badge;
+import christmas.domain.Badge;
 import christmas.domain.benefit.Benefit;
 import christmas.domain.event.Event;
 import christmas.global.Comment;

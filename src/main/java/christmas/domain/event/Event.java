@@ -1,7 +1,7 @@
 package christmas.domain.event;
 
 import christmas.domain.benefit.Benefit;
-import christmas.domain.Order;
+import christmas.domain.order.Order;
 
 /**
  * @ImplSpec 이벤트는 이름, 혜택, 조건을 가진다.

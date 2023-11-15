@@ -6,7 +6,6 @@ import static christmas.global.Comment.VISIT_DATE_COMMENT;
 import static christmas.global.Comment.WELCOME_COMMENT;
 import static christmas.view.OutputView.println;
 
-import christmas.domain.BenefitHistoryGenerator;
 import christmas.domain.EventPlanner;
 import christmas.domain.benefit.BenefitHistory;
 import christmas.domain.order.Order;
